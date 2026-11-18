@@ -65,6 +65,23 @@ Permanent install: Firefox only keeps signed add-ons. Signing is free and automa
 3. Download the signed `.xpi` and open it in the browser.
 4. Check the site permissions as in step 4 above.
 
+addons.mozilla.org may block uploads from VPN IP addresses. If it does, use the unsigned install below.
+
+Permanent install without signing: works in browsers that let you turn off the signature check, such as Zen,
+Firefox Developer Edition, Nightly, and ESR. Regular Firefox ignores the setting.
+
+1. Open `about:config` and set `xpinstall.signatures.required` to `false`. Leave it off: turning it back on disables
+   the extension.
+2. Zip the folder contents as an `.xpi`:
+   `cd circleci-geo-guard && zip -r ../circleci-geo-guard.xpi . -x '.git/*'`
+3. Open `about:addons`, click the gear icon, choose **Install Add-on From File…**, and pick the `.xpi`. If the browser
+   says the add-on is corrupt, it enforces signing; use the signed install instead.
+4. Check the site permissions as in step 4 above.
+5. You can delete the `.xpi` afterwards; the browser keeps its own copy.
+
+The setting lets the browser install any unsigned add-on, so only install `.xpi` files you built or trust. To update,
+`git pull`, rebuild the `.xpi`, and install it again.
+
 ### Check that it works
 
 1. Open [app.circleci.com](https://app.circleci.com). You should see "Checking your location..." for a moment, then
@@ -85,8 +102,9 @@ Install the CircleCI Geo Guard browser extension from https://github.com/zzaakii
 3. Find which browsers I have installed (Chrome or other Chromium-based browsers, Firefox or other Firefox-based browsers).
 4. For each one, walk me through the install steps from the README one at a time, waiting for me to confirm each
    step. You cannot click in the browser for me, so give me the exact page to open and the exact button to press.
-5. For Firefox, ask whether I want the temporary install or the permanent signed one. For the signed one,
-   build the zip for me with the command in the README.
+5. For Firefox, ask whether I want the temporary install, the permanent signed one, or the permanent unsigned one
+   (Zen, Developer Edition, Nightly, ESR). For the signed or unsigned one, build the zip or `.xpi` for me with the
+   command in the README.
 6. Finish by walking me through "Check that it works".
 ```
 

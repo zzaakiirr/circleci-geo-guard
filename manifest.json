@@ -1,0 +1,61 @@
+{
+  "manifest_version": 3,
+  "name": "CircleCI Geo Guard",
+  "version": "1.2.0",
+  "description": "Blocks circleci.com while your IP is in a CircleCI sanctioned location.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "circleci-geo-guard@local",
+      "strict_min_version": "128.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    }
+  },
+  "permissions": [
+    "declarativeNetRequest",
+    "alarms"
+  ],
+  "host_permissions": [
+    "*://*.circleci.com/*",
+    "*://*.circleci.io/*",
+    "*://*.circleci.dev/*",
+    "*://*.circle-artifacts.com/*",
+    "*://*.d2qm0z2kzhiwa.cloudfront.net/*",
+    "https://api.country.is/*",
+    "https://ipinfo.io/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "blocked.html"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    },
+    "default_title": "CircleCI Geo Guard"
+  }
+}
